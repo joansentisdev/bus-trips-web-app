@@ -61,6 +61,7 @@ const useStyles = createUseStyles({
     flexDirection: 'column',
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
+    minWidth: 100,
   },
   tripCardStatus: ({ status }) => ({
     display: 'flex',
