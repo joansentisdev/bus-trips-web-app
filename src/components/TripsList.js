@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { createUseStyles } from 'react-jss';
-import axios from 'axios';
+
+import TripCard from './TripCard';
 
 const useStyles = createUseStyles({
   tripsList: {
@@ -8,37 +9,22 @@ const useStyles = createUseStyles({
     top: 0,
     bottom: 0,
     left: 0,
-    width: '25%',
+    width: 360,
+    padding: [12, 12, 24, 12],
     overflow: 'auto',
     zIndex: 1,
   },
 });
 
-function TripsList() {
+function TripsList({ trips }) {
   const classes = useStyles();
-  const [trips, setTrips] = useState([]);
-
-  const fetchTrips = async () => {
-    try {
-      const { data } = await axios(
-        'https://europe-west1-metropolis-fe-test.cloudfunctions.net/api/trips',
-      );
-      setTrips(data);
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  useEffect(() => {
-    fetchTrips();
-  }, []);
 
   return (
     <div className={classes.tripsList}>
       {trips.map((trip, i) => (
-        <li key={i}>
-          {trip.description}
-        </li>
+        <TripCard
+          key={i} 
+          trip={trip} />
       ))}
     </div>
   );

@@ -92,11 +92,10 @@ function BusLinesMap({ google }) {
       initialCenter={initialCenter}
       disableDefaultUI={true}
       zoomControl={true}
-      fullscreenControl={true}
     />
   );
 }
 
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyD1aCwKJ42a5xoT7lk4EEgdHueW0vMY8TA',
-})(BusLinesMap);
+})(BusLinesMap); 
