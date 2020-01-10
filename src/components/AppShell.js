@@ -1,9 +1,11 @@
 import React from 'react';
 import BusLinesMap from './BusLinesMap';
+import TripsList from './TripsList';
 
 function AppShell() {
   return (
-    <div className="App">
+    <div>
+      <TripsList />
       <BusLinesMap />
     </div>
   );
