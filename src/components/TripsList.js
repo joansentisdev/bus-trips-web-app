@@ -16,15 +16,20 @@ const useStyles = createUseStyles({
   },
 });
 
-function TripsList({ trips }) {
+function TripsList({ trips, onSelectTrip }) {
   const classes = useStyles();
+
+  const selectTrip = (trip) => {
+    onSelectTrip(trip);
+  }
 
   return (
     <div className={classes.tripsList}>
       {trips.map((trip, i) => (
         <TripCard
           key={i} 
-          trip={trip} />
+          trip={trip}
+          onSelectTrip={selectTrip} />
       ))}
     </div>
   );

@@ -3,11 +3,12 @@ import axios from 'axios';
 
 import tripsMock from '../utils/trips';
 
-import BusLinesMap from './BusLinesMap';
+import BusTripsMap from './BusTripsMap';
 import TripsList from './TripsList';
 
 function AppShell() {
   const [trips, setTrips] = useState(tripsMock);
+  const [selectedTrip, setSelectedTrip] = useState();
 
   const fetchTrips = async () => {
     try {
@@ -24,10 +25,14 @@ function AppShell() {
     fetchTrips();
   }, []);
 
+  const onSelectTrip = (trip) => {
+    setSelectedTrip(trip);
+  }
+
   return (
     <div>
-      <TripsList trips={trips} />
-      <BusLinesMap />
+      <TripsList trips={trips} onSelectTrip={onSelectTrip} />
+      <BusTripsMap trip={selectedTrip} />
     </div>
   );
 }

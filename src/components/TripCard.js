@@ -89,11 +89,11 @@ const useStyles = createUseStyles({
   },
 });
 
-function TripCard({ trip }) {
+function TripCard({ trip, onSelectTrip }) {
   const classes = useStyles(trip);
   const iconsize = 12;
 
-  const getStatusIcon = (status) => {
+  const getStatusIcon = () => {
     const statusIconsMap = {
       ongoing: <Compass size={iconsize} />,
       scheduled: <Clock size={iconsize} />,
@@ -101,7 +101,11 @@ function TripCard({ trip }) {
       finalized: <CheckCircle size={iconsize} />,
     };
 
-    return statusIconsMap[status];
+    return statusIconsMap[trip.status];
+  };
+
+  const selectTrip = () => {
+    onSelectTrip(trip);
   };
 
   return (
@@ -118,11 +122,13 @@ function TripCard({ trip }) {
       </div>
       <div className={classes.tripCardInfo}>
         <div className={classes.tripCardStatus}>
-          {getStatusIcon(trip.status)}
+          {getStatusIcon()}
           {trip.status}
         </div>
-        <button className={classes.tripCardAction}>
-          See route
+        <button
+          className={classes.tripCardAction}
+          onClick={selectTrip}>
+          See trip
         </button>
       </div>
     </div>
