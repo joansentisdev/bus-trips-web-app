@@ -1,21 +1,23 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
-import { CheckCircle, Circle, Clock, Compass, MapPin, XCircle } from 'react-feather';
+import { ArrowRight, Check, Circle, Clock, MapPin, X } from 'react-feather';
 
 const statusColorMap = {
   ongoing: '#4caf50',
   scheduled: '#ff8f00',
   cancelled: '#e53935',
-  finalized: '#616161',
+  finalized: '#7e57c2',
 };
 
 const useStyles = createUseStyles({
   tripCard: {
     display: 'flex',
-    background: 'rgba(255, 255, 255, .8)',
+    position: 'relative',
+    background: '#0d1521',
     borderRadius: 8,
-    marginBottom: 12,
+    marginBottom: 16,
     minHeight: 80,
+    color: '#ffffff',
   },
   tripCardPath: {
     flex: 1,
@@ -36,7 +38,7 @@ const useStyles = createUseStyles({
         bottom: -2,
         left: 5,
         width: 1.5,
-        background: 'rgba(0,0,0,.4)',
+        background: 'rgba(255, 255, 255,.4)',
         borderRadius: 8,
       },
       '&:after': {
@@ -46,7 +48,7 @@ const useStyles = createUseStyles({
         left: 20,
         width: 'calc(100% - 20px)',
         height: 1,
-        background: 'rgba(0,0,0,.1)',
+        background: 'rgba(255, 255, 255,.1)',
         borderRadius: 8,
       },
     },
@@ -67,14 +69,15 @@ const useStyles = createUseStyles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
-    height: '100%',
-    fontSize: 14,
-    fontWeight: 600,
-    color: statusColorMap[status],
-    textTransform: 'capitalize',
+    position: 'absolute',
+    top: -4,
+    right: -4,
+    width: 24,
+    height: 24,
+    background: statusColorMap[status],
+    borderRadius: '50%',
     '& svg': {
-      marginRight: 4,
+      color: '#ffffff',
     },
   }),
   tripCardAction: {
@@ -96,10 +99,10 @@ function TripCard({ trip, onSelectTrip }) {
 
   const getStatusIcon = () => {
     const statusIconsMap = {
-      ongoing: <Compass size={iconsize} />,
+      ongoing: <ArrowRight size={iconsize} />,
       scheduled: <Clock size={iconsize} />,
-      cancelled: <XCircle size={iconsize} />,
-      finalized: <CheckCircle size={iconsize} />,
+      cancelled: <X size={iconsize} />,
+      finalized: <Check size={iconsize} />,
     };
 
     return statusIconsMap[trip.status];
@@ -124,7 +127,6 @@ function TripCard({ trip, onSelectTrip }) {
       <div className={classes.tripCardInfo}>
         <div className={classes.tripCardStatus}>
           {getStatusIcon()}
-          {trip.status}
         </div>
         <button
           className={classes.tripCardAction}

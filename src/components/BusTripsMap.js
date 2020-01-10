@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { GoogleApiWrapper, Map, Marker, Polyline } from 'google-maps-react';
 
 import mapStyles from '../utils/darkMapStyles';
-import busStopIcon from '../assets/icons/bus-stop.png';
+import busStopIcon from '../assets/icons/circle.svg';
 
 function BusTripsMap({ trip }) {
   const [markers, setMarkers] = useState([]);
@@ -43,8 +43,8 @@ function BusTripsMap({ trip }) {
   }}
   icon={{
     url: busStopIcon,
-    anchor: new window.google.maps.Point(16,16),
-    scaledSize: new window.google.maps.Size(32,32)
+    anchor: new window.google.maps.Point(12,12),
+    scaledSize: new window.google.maps.Size(24,24)
   }} />);
 
   return (
