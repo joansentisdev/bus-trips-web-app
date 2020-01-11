@@ -1,6 +1,8 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
 import { ArrowRight, Check, Circle, Clock, MapPin, X } from 'react-feather';
+import classNames from 'classnames';
+import { useStore } from "../store";
 
 const statusColorMap = {
   ongoing: '#4caf50',
@@ -15,9 +17,23 @@ const useStyles = createUseStyles({
     position: 'relative',
     background: '#0d1521',
     borderRadius: 8,
-    marginBottom: 16,
-    minHeight: 80,
+    marginRight: 12,
+    width: 320,
+    height: 80,
     color: '#ffffff',
+    cursor: 'pointer',
+    transition: '.2s width ease-in-out',
+    '&:hover': {
+      width: 340,
+    },
+    '@media(min-width: 800px)': {
+      marginBottom: 16,
+      marginLeft: 0,
+    },
+  },
+  tripCardActive: {
+    width: 340,
+    border: 'thin solid',
   },
   tripCardPath: {
     flex: 1,
@@ -58,13 +74,6 @@ const useStyles = createUseStyles({
       color: '#5c6bc0',
     },
   },
-  tripCardInfo: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
-    minWidth: 100,
-  },
   tripCardStatus: ({ status }) => ({
     display: 'flex',
     alignItems: 'center',
@@ -80,21 +89,11 @@ const useStyles = createUseStyles({
       color: '#ffffff',
     },
   }),
-  tripCardAction: {
-    border: 0,
-    background: '#3f51b5',
-    borderRadius: [8, 0, 8, 0],
-    fontSize: 14,
-    fontWeight: 600,
-    color: '#ffffff',
-    padding: [12, 20, 12, 20],
-    outline: 0,
-    cursor: 'pointer',
-  },
 });
 
-function TripCard({ trip, onSelectTrip }) {
+function TripCard({ trip }) {
   const classes = useStyles(trip);
+  const [{ selectedTrip }, dispatch] = useStore();
   const iconsize = 12;
 
   const getStatusIcon = () => {
@@ -109,11 +108,13 @@ function TripCard({ trip, onSelectTrip }) {
   };
 
   const selectTrip = () => {
-    onSelectTrip(trip);
+    dispatch({ type: "selectTrip", trip })
   };
 
   return (
-    <div className={classes.tripCard}>
+    <div
+      className={classNames(classes.tripCard, { [classes.tripCardActive]: selectedTrip === trip })}
+      onClick={selectTrip}>
       <div className={classes.tripCardPath}>
         <div className={classes.tripCardPathItem}>
           <Circle size={iconsize} />
@@ -124,15 +125,8 @@ function TripCard({ trip, onSelectTrip }) {
           {trip.destination.address}
         </div>
       </div>
-      <div className={classes.tripCardInfo}>
-        <div className={classes.tripCardStatus}>
-          {getStatusIcon()}
-        </div>
-        <button
-          className={classes.tripCardAction}
-          onClick={selectTrip}>
-          See trip
-        </button>
+      <div className={classes.tripCardStatus}>
+        {getStatusIcon()}
       </div>
     </div>
   );
