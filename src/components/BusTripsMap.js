@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { createUseStyles } from 'react-jss';
 import { GoogleApiWrapper, InfoWindow, Map, Marker, Polyline } from 'google-maps-react';
+import { Clock } from 'react-feather';
+import moment from 'moment';
 import axios from 'axios';
 
 import { useStore } from "../store";
@@ -7,7 +10,29 @@ import mapStyles from '../utils/darkMapStyles';
 import busStopIcon from '../assets/icons/circle.svg';
 import spinnerIcon from '../assets/icons/spinner.svg';
 
+const useStyles = createUseStyles({
+  infoWindow: {
+    padding: 8,
+  },
+  infoWindowAddress: {
+    fontFamily: '"Montserrat", sans-serif',
+    fontSize: 14,
+    marginBottom: 8,
+  },
+  infoWindowTime: {
+    display: 'flex',
+    alignItems: 'center',
+    fontSize: 18,
+    fontWeight: 600,
+    '& svg': {
+      marginRight: 6,
+      color: '#3f51b5',
+    },
+  },
+});
+
 function BusTripsMap() {
+  const classes = useStyles();
   const [{ selectedTrip }] = useStore();
   const [stops, setStops] = useState([]);
   const [activeMarker, setActiveMarker] = useState();
@@ -18,6 +43,17 @@ function BusTripsMap() {
   });
 
   const getRoutePath = () => selectedTrip ? window.google.maps.geometry.encoding.decodePath(selectedTrip.route) : [];
+
+  const getSeletedStopTime = () => {
+    const timesMap = {
+      origin: selectedTrip.startTime,
+      destination: selectedTrip.endTime,
+      default: selectedStop.stopTime,
+    };
+
+    const time = timesMap[selectedStop.id] || timesMap.default;
+    return moment(time).format('HH:mm');
+  };
 
   const resetInfoWindow = () => {
     setActiveMarker(null);
@@ -56,7 +92,7 @@ function BusTripsMap() {
     polyline.forEach((item) => bounds.extend(item));
     setMapOptions({
       center: bounds.getCenter(),
-      zoom: 12,
+      zoom: 11,
     });
 
     // Update the stops
@@ -97,8 +133,13 @@ function BusTripsMap() {
         visible={Boolean(activeMarker)}
         onClose={resetInfoWindow}>
         {selectedStop ? (
-          <div>
-            {selectedStop.address}
+          <div className={classes.infoWindow}>
+            <div className={classes.infoWindowAddress}>
+              {selectedStop.address}
+            </div>
+            <div className={classes.infoWindowTime}>
+              <Clock size={18} /> {getSeletedStopTime()}
+            </div>
           </div>
         ) : <img src={spinnerIcon} alt="spinner" />}
       </InfoWindow>

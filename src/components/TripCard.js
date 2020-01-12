@@ -1,7 +1,9 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
-import { ArrowRight, Check, Circle, Clock, MapPin, X } from 'react-feather';
+import { ArrowRight, Calendar, Check, Circle, MapPin, X } from 'react-feather';
 import classNames from 'classnames';
+import moment from 'moment';
+
 import { useStore } from "../store";
 
 const statusColorMap = {
@@ -17,14 +19,17 @@ const useStyles = createUseStyles({
     position: 'relative',
     background: '#0d1521',
     borderRadius: 8,
-    marginRight: 12,
-    width: 320,
+    marginRight: 16,
+    minWidth: 320,
+    maxWidth: 320,
     height: 80,
     color: '#ffffff',
     cursor: 'pointer',
-    transition: '.2s width ease-in-out',
+    border: 'thin solid transparent',
+    transition: '.2s all ease-in-out',
     '&:hover': {
-      width: 340,
+      minWidth: 340,
+      maxWidth: 340,
     },
     '@media(min-width: 800px)': {
       marginBottom: 16,
@@ -32,12 +37,13 @@ const useStyles = createUseStyles({
     },
   },
   tripCardActive: {
-    width: 340,
+    minWidth: 340,
+    maxWidth: 340,
     border: 'thin solid',
   },
   tripCardPath: {
     flex: 1,
-    padding: [12, 24, 12, 16],
+    padding: [12, 0, 12, 16],
   },
   tripCardPathItem: {
     display: 'flex',
@@ -74,13 +80,24 @@ const useStyles = createUseStyles({
       color: '#5c6bc0',
     },
   },
+  tripCardDuration: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    width: 80,
+    fontSize: 18,
+    '& > div': {
+      fontSize: 14,
+    },
+  },
   tripCardStatus: ({ status }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
-    top: -4,
-    right: -4,
+    top: -8,
+    right: -8,
     width: 24,
     height: 24,
     background: statusColorMap[status],
@@ -96,10 +113,12 @@ function TripCard({ trip }) {
   const [{ selectedTrip }, dispatch] = useStore();
   const iconsize = 12;
 
+  const getTripDuration = () => moment.duration(moment(trip.endTime).diff(trip.startTime)).as('minutes');
+
   const getStatusIcon = () => {
     const statusIconsMap = {
       ongoing: <ArrowRight size={iconsize} />,
-      scheduled: <Clock size={iconsize} />,
+      scheduled: <Calendar size={iconsize} />,
       cancelled: <X size={iconsize} />,
       finalized: <Check size={iconsize} />,
     };
@@ -123,6 +142,12 @@ function TripCard({ trip }) {
         <div className={classes.tripCardPathItem}>
           <MapPin size={iconsize} />
           {trip.destination.address}
+        </div>
+      </div>
+      <div className={classes.tripCardDuration}>
+        {getTripDuration()}
+        <div>
+          min
         </div>
       </div>
       <div className={classes.tripCardStatus}>

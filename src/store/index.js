@@ -17,12 +17,9 @@ const reducer = createReducer({
     ...state,
     selectedTrip: trip,
   }),
-  'upsertTrips': (state, { trips }) => ({
+  'updateTrips': (state, { trips }) => ({
     ...state,
-    trips: [
-      ...state.trips,
-      ...trips,
-    ],
+    trips,
   }),
 });
 

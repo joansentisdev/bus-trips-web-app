@@ -33,7 +33,7 @@ function TripsList() {
       const { data: trips } = await axios(
         'https://europe-west1-metropolis-fe-test.cloudfunctions.net/api/trips',
       );
-      dispatch({ type: "upsertTrips", trips });
+      dispatch({ type: "updateTrips", trips });
     } catch (error) {
       // do nothing
     }
