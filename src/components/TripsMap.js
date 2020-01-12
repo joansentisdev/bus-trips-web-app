@@ -31,7 +31,7 @@ const useStyles = createUseStyles({
   },
 });
 
-function BusTripsMap() {
+function TripsMap() {
   const classes = useStyles();
   const [{ selectedTrip }] = useStore();
   const [stops, setStops] = useState([]);
@@ -150,4 +150,4 @@ function BusTripsMap() {
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyD1aCwKJ42a5xoT7lk4EEgdHueW0vMY8TA',
   libraries: ['geometry'],
-})(BusTripsMap); 
+})(TripsMap); 

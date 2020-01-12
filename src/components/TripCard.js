@@ -39,7 +39,7 @@ const useStyles = createUseStyles({
   tripCardActive: {
     minWidth: 340,
     maxWidth: 340,
-    border: 'thin solid',
+    border: 'thin solid #f5f5f5',
   },
   tripCardPath: {
     flex: 1,
