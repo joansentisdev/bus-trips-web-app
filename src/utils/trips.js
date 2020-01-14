@@ -1,12 +1,10 @@
 export default [
   {
     startTime: '2018-12-18T08:00:00.000Z',
-    description: 'Barcelona a Martorell',
-    driverName: 'Alberto Morales',
     route: 'sdq{Fc}iLj@zR|W~TryCzvC??do@jkKeiDxjIccLhiFqiE`uJqe@rlCy~B`t@sK|i@',
     status: 'ongoing',
     origin: {
-      address: 'Metropolis:lab, Barcelona',
+      address: 'Barcelona',
       point: {
         _latitude: 41.38074,
         _longitude: 2.18594
@@ -43,7 +41,7 @@ export default [
       }
     ],
     destination: {
-      address: 'Seat HQ, Martorell',
+      address: 'Martorell',
       point: {
         _latitude: 41.49958,
         _longitude: 1.90307
@@ -61,12 +59,10 @@ export default [
     },
     endTime: '2018-12-18T08:45:00.000Z',
     startTime: '2018-12-18T08:00:00.000Z',
-    description: 'Barcelona a Sant cugat',
-    driverName: 'Joaquin Sabina',
     route: 'sdq{Fc}iLeoBrgBs@xsGecD|sEswEv|Cek@cyA',
     status: 'ongoing',
     origin: {
-      address: 'Metropolis:lab, Barcelona',
+      address: 'Barcelona',
       point: {
         _latitude: 41.38074,
         _longitude: 2.18594
@@ -99,12 +95,10 @@ export default [
     },
     endTime: '2018-12-18T07:50:00.000Z',
     startTime: '2018-12-18T07:00:00.000Z',
-    description: 'Barcelona a Cerdanyola',
-    driverName: 'Rosalia',
     route: 'sdq{Fc}iLurAy{AyiEabDgfDhqEgyB|gA{x@xv@{x@rsF',
     status: 'ongoing',
     origin: {
-      address: 'Metropolis:lab, Barcelona',
+      address: 'Barcelona',
       point: {
         _latitude: 41.38074,
         _longitude: 2.18594
@@ -137,8 +131,6 @@ export default [
     },
     endTime: '2018-12-24T16:30:00.000Z',
     startTime: '2018-12-24T16:00:00.000Z',
-    description: 'Girona  a Banyoles',
-    driverName: 'Fernando Castaño',
     route: 'mif_GoifP}`F?auAst@qdCxmA}lD|GikF`aEfUl}AisAj_A',
     status: 'scheduled',
     origin: {
@@ -167,15 +159,13 @@ export default [
   },
   {
     origin: {
-      address: 'Metropolis:lab, Barcelona',
+      address: 'Barcelona',
       point: {
         _latitude: 41.38074,
         _longitude: 2.18594
       }
     },
-    stops: [
-      {}
-    ],
+    stops: [],
     destination: {
       address: 'Badalona centre, Barcelona',
       point: {
@@ -185,14 +175,12 @@ export default [
     },
     endTime: '2018-12-19T09:00:00.000Z',
     startTime: '2018-12-19T08:00:00.000Z',
-    description: 'Barcelona a Badalona',
-    driverName: 'Luciano fernando de la caslada y Maria',
     route: 'sdq{Fc}iLqsCcsByoCgjBelAmT',
     status: 'cancelled'
   },
   {
     destination: {
-      address: 'Metropolis:lab, Barcelona',
+      address: 'Barcelona',
       point: {
         _latitude: 41.38074,
         _longitude: 2.18594
@@ -200,23 +188,18 @@ export default [
     },
     endTime: '2018-12-18T16:00:00.000Z',
     startTime: '2018-12-18T15:00:00.000Z',
-    description: 'Martorell a Barcelona',
-    driverName: 'Concha Piquer',
     route: 'sdq{Fc}iLj@zR|W~TryCzvC??do@jkKeiDxjIccLhiFqiE`uJqe@rlCy~B`t@sK|i@',
     status: 'scheduled',
     origin: {
-      address: 'SEAT HQ, Martorell',
+      address: 'Martorell',
       point: {
         _latitude: 41.49958,
         _longitude: 1.90307
       }
     },
-    stops: [
-      {}
-    ]
+    stops: []
   },
   {
-    driverName: 'John Smith',
     route: 'sdq{Fc}iLeoBrgBs@xsGecD|sEswEv|Cek@cyA',
     status: 'finalized',
     origin: {
@@ -226,11 +209,9 @@ export default [
         _longitude: 2.08006
       }
     },
-    stops: [
-      {}
-    ],
+    stops: [],
     destination: {
-      address: 'Metropolis:lab, Barcelona',
+      address: 'Barcelona',
       point: {
         _latitude: 41.38074,
         _longitude: 2.18594
@@ -238,6 +219,5 @@ export default [
     },
     endTime: '2018-12-16T10:00:00.000Z',
     startTime: '2018-12-16T09:00:00.000Z',
-    description: 'Sant Cugat a Barcelona'
   }
 ];

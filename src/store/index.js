@@ -17,10 +17,6 @@ const reducer = createReducer({
     ...state,
     selectedTrip: trip,
   }),
-  'updateTrips': (state, { trips }) => ({
-    ...state,
-    trips,
-  }),
 });
 
 export const StoreProvider = ({ children }) => {

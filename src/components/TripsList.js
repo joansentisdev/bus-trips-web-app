@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createUseStyles } from 'react-jss';
-import axios from 'axios';
 
 import { useStore } from "../store";
 
@@ -26,24 +25,7 @@ const useStyles = createUseStyles({
 
 function TripsList() {
   const classes = useStyles();
-  const [{ trips }, dispatch] = useStore();
-
-  const fetchTrips = async () => {
-    try {
-      const { data: trips } = await axios(
-        'https://europe-west1-metropolis-fe-test.cloudfunctions.net/api/trips',
-      );
-      dispatch({ type: "updateTrips", trips });
-    } catch (error) {
-      // do nothing
-    }
-  };
-
-  useEffect(() => {
-    fetchTrips();
-  },
-  // eslint-disable-next-line
-  []);
+  const [{ trips }] = useStore();
 
   return (
     <div className={classes.tripsList}>
